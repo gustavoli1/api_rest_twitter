@@ -1,0 +1,88 @@
+version: '3'
+
+services:
+
+  db_twitter: 
+    image: mysql:latest
+    container_name: db_twitter
+    environment:
+      MYSQL_ROOT_PASSWORD: "p0o9i8u7y6"
+      MYSQL_USER: "twitter_user"
+      MYSQL_PASSWORD: "p0o9i8u7y6"
+      MYSQL_DATABASE: "twitter_db"
+    ports:
+      - "3306:3306"
+    volumes:
+      - /tmp/MySql:/var/lib/mysql
+    networks:
+      - compose-network
+    logging:
+      driver: json-file
+      options:
+        tag: "{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}"
+    
+  loki:
+    image: grafana/loki:2.4.0
+    container_name: loki
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki-config.yaml:/mnt/config/loki-config.yaml
+    command: -config.file=/mnt/config/loki-config.yaml
+    networks:
+      - compose-network
+    logging:
+      driver: json-file
+      options:
+        tag: "{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}"    
+
+  promtail:
+    image: grafana/promtail:2.4.0
+    container_name: promtail
+    volumes:
+      - ./promtail-config.yaml:/mnt/config/promtail-config.yaml
+      - /var/lib/docker/containers:/host/containers
+    command: -config.file=/mnt/config/promtail-config.yaml
+    networks:
+      - compose-network
+    logging:
+      driver: json-file
+      options:
+        tag: "{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}"
+
+  grafana:
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: p0o9i8u7y6
+    image: grafana/grafana:latest
+    container_name: grafana
+    volumes:
+    - ./provisioning:/etc/grafana/provisioning
+    ports:
+      - "3000:3000"
+    networks:
+      - compose-network
+    logging:
+      driver: json-file
+      options:
+        tag: "{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}"    
+
+  api_rest_twitter:
+    depends_on:
+      - "db_twitter"
+    build:
+      context: $PWD/api_rest_twitter/      
+      dockerfile: $PWD/api_rest_twitter/Dockerfile
+    container_name: api_rest_twitter
+    ports:
+       - "5000:5000"
+    networks:
+       - compose-network
+    logging:
+      driver: json-file
+      options:
+        tag: "{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}"
+
+networks: 
+  compose-network:
+    driver: bridge
+
