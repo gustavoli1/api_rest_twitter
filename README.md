@@ -1,6 +1,6 @@
 ## CASE - TWITTER 
 
-No momento esta aplicação segue em desenvolvimento com vários pontos à melhorar, como implementação de métricas, gerencimaneto de secrets e serviços de mensagerias, melhorias no código e na aquitetura além de novas funções, visto que precisa aumentar a confiabilidade e segurança. Esta aplicação tem como finalidade consumir a API/V2 do Twitter pesquisando por termos ("hashtag") e inserir no banco de dados para consultas. No momento é possível inserir termos de forma dinâmica através da API da aplicação. Através desta API também é possível listar de forma dinâmica e separada os Tweet por "idioma/língua". Este ambiente foi desevolvido em cima do "Docker-Compose" e para seu desenvolvimento foi utilizado Python, Shell Script, Flask e MySQL. 
+No momento este case segue em desenvolvimento com vários pontos à melhorar, como implementação de métricas, gerencimaneto de secrets, serviços de mensagerias, melhorias no código, novas funcionalidades, além da aquitetura que precisa ser revisitada. Visto que precisa aumentar a confiabilidade e segurança do ambiente. Esta aplicação tem como finalidade consumir a "API/V2" do Twitter pesquisando por termos ("hashtag") e inserir o retorno dos dados no banco de dados. No momento é possível inserir termos de forma dinâmica através da aplicação, também é possível listar de forma dinâmica e separada os Tweet por "idioma/língua". Este ambiente foi desevolvido em cima do "Docker-Compose" e para seu desenvolvimento foi utilizado Python, Shell Script, Flask e MySQL. 
 
 ## Pré-Requisitos
 
