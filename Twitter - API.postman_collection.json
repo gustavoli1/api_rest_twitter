@@ -1,0 +1,60 @@
+{
+	"info": {
+		"_postman_id": "a7563826-b4ea-41ed-bd28-2271dcd95747",
+		"name": "Twitter - API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Classificar termo por idioma",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/lang?hashtag=metrics",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"lang"
+					],
+					"query": [
+						{
+							"key": "hashtag",
+							"value": "metrics"
+						}
+					]
+				},
+				"description": "Classifica o termo por idioma"
+			},
+			"response": []
+		},
+		{
+			"name": "Inserir termo na base de dados",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/insert?hashtag",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"insert"
+					],
+					"query": [
+						{
+							"key": "hashtag",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

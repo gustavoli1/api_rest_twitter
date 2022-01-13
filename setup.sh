@@ -1,5 +1,13 @@
 #!/bin/bash
+
 echo "######################## Inicializando o Ambiente ##########################"
+
+service docker stop
+
+mv daemon.json /etc/docker/daemon.json
+
+service docker restart
+
 docker-compose up -d
 
 sleep 30
