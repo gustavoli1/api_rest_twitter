@@ -40,7 +40,7 @@ curl http://localhost:5000/lang?hashtag=TAG
 
 ## STACK LOKI+PROMTAIL+GRAFANA - Consultar logs do ambiente e da aplicação.
 
-Basta acessar o Grafana e utilizar o Explore para consultar os logs. Segue os dados do usuário de acesso ("user:admin" - "passwd:p0o9i8u7y6"). 
+Basta acessar o Grafana e utilizar o Explore para consultar os logs. Segue os dados do usuário de acesso ("user=admin" - "passwd=p0o9i8u7y6"). 
 
 ```
 http://localhost:3000/explore
