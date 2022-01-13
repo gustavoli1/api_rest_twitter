@@ -1,6 +1,6 @@
 ## CASE - TWITTER 
 
-No momento este case segue em desenvolvimento com diversos pontos a melhorar, como implementação de métricas, gerencimaneto de secrets, serviços de mensagerias, melhorias no código, novas funcionalidades, além da aquitetura que precisa ser revista. Visto que precisa aumentar a confiabilidade e segurança do ambiente.
+No momento este case segue em desenvolvimento com diversos pontos a melhorar, como implementação de métricas, gerencimaneto de secrets, serviços de mensagerias, melhorias no código, novas funcionalidades, além da arquitetura que precisa ser revista. Visto que precisa aumentar a confiabilidade e segurança do ambiente.
 
 Esta aplicação tem como finalidade consumir a "API/V2" do Twitter pesquisando por termos ("hashtag") e inserir o retorno dos dados no banco. No momento é possível inserir tags de forma dinâmica através da aplicação, também é possível listar de forma dinâmica e separada os Tweet por "idioma/língua". 
 
