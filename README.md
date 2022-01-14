@@ -45,15 +45,18 @@ curl http://localhost:5000/lang?hashtag=TAG
 
 ## LOGS do ambiente e da API - STACK (LOKI+PROMTAIL+GRAFANA)
 
-Basta acessar o Grafana e utilizar o Explore para consultar os logs. Segue os dados do usuário de acesso ("user=admin" - "passwd=p0o9i8u7y6"). 
+O Grafana é basicamente uma ferramenta que utliza de diversas fontes de dados para provisionar paíneis de métricas e LOGs. Nesta stack utlizaremos o LOKI como  centralizador de LOGs e utilizar o Explore do Grafana para consultar logs. 
+
+Segue os dados de acesso ("USER=admin" - "PASSWD=p0o9i8u7y6").
 
 [http://localhost:3000/explore](http://localhost:3000/explore)
 
-Para coletar os logs de saída de um container em específico, pode utilizar como exemplo esta query conforme esta url abaixo: {container_name="api_rest_twitter"}
+
+Para coletar os logs de saída de um container em específico, pode utilizar como exemplo esta query {container_name="api_rest_twitter"} como demonstrado nesta URL: 
 
 [http://localhost:3000/explore?orgId=1&left=%5B%22now-1h%22,%22now%22,%22loki%22,%7B%22refId%22:%22A%22,%22expr%22:%22%7Bcontainer_name%3D%5C%22api_rest_twitter%5C%22%7D%22%7D%5D](http://localhost:3000/explore?orgId=1&left=%5B%22now-1h%22,%22now%22,%22loki%22,%7B%22refId%22:%22A%22,%22expr%22:%22%7Bcontainer_name%3D%5C%22api_rest_twitter%5C%22%7D%22%7D%5D)
 
-
+![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/explore_1.png)
 
 ## Postman - Collection
 
