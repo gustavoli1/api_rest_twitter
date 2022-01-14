@@ -11,7 +11,7 @@ Uma observação importante é que as secrets keys e tokens contidos nestes proj
 
 Para o provisiomento deste ambiente é necessário que seu sistema operacional seja Linux, tenha Git e "Docker-Compose" instalado e configurado.
 
-## Qual é a composição de microsserviços do "Docker-Compose"?
+## Composição do Docker-Compose
 
  - db_twitter - ("Bando de Dados")
  - loki - ("Logs Centralizados")
@@ -43,20 +43,19 @@ Qual o total de postagens para cada uma das #tag por "idioma/língua" do usuári
 curl http://localhost:5000/lang?hashtag=TAG
 ```
 
-## STACK LOKI+PROMTAIL+GRAFANA - Consultar logs do ambiente e da aplicação.
+## LOGS do ambiente e da API - STACK (LOKI+PROMTAIL+GRAFANA)
 
 Basta acessar o Grafana e utilizar o Explore para consultar os logs. Segue os dados do usuário de acesso ("user=admin" - "passwd=p0o9i8u7y6"). 
 
-```
-http://localhost:3000/explore
-```
-Para coletar os logs de saída de um container em específico, pode utilizar esta query por exemplo como demonstrado na url abaixo: {container_name="api_rest_twitter"}
+[http://localhost:3000/explore](http://localhost:3000/explore)
 
-```
-http://localhost:3000/explore?orgId=1&left=%5B%22now-1h%22,%22now%22,%22loki%22,%7B%22refId%22:%22A%22,%22expr%22:%22%7Bcontainer_name%3D%5C%22api_rest_twitter%5C%22%7D%22%7D%5D
-```
+Para coletar os logs de saída de um container em específico, pode utilizar como exemplo esta query conforme esta url abaixo: {container_name="api_rest_twitter"}
+
+[http://localhost:3000/explore?orgId=1&left=%5B%22now-1h%22,%22now%22,%22loki%22,%7B%22refId%22:%22A%22,%22expr%22:%22%7Bcontainer_name%3D%5C%22api_rest_twitter%5C%22%7D%22%7D%5D](http://localhost:3000/explore?orgId=1&left=%5B%22now-1h%22,%22now%22,%22loki%22,%7B%22refId%22:%22A%22,%22expr%22:%22%7Bcontainer_name%3D%5C%22api_rest_twitter%5C%22%7D%22%7D%5D)
+
+
 
 ## Postman - Collection
 
-Caso prefira utiliar o Postman é necessário importar o aquivo "Twitter - API.postman_collection" e ao utilizar o método GET inserir a "tag" no valor da chave hashtag.
+Para utilizar Postman é necessário importar o aquivo "Twitter - API.postman_collection" e inserir o valor da "tag" na chave hashtag para encontrar o termo.
 
