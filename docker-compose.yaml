@@ -54,7 +54,7 @@ services:
     image: prom/prometheus:v2.30.3
     container_name: prometheus
     ports:
-      - 9000:9090
+      - "9000:9090"
     volumes:
       - ./prometheus:/etc/prometheus
       - prometheus-data:/prometheus
@@ -89,6 +89,7 @@ services:
     container_name: api_rest_twitter
     ports:
        - "5000:5000"
+       - "9100:9100"
     networks:
        - compose-network
     logging:
