@@ -35,6 +35,9 @@ Para coletar e armazenar as mensagens na base de dados de forma dinâmica, basta
 curl http://localhost:5000/insert?hashtag=TAG
 ```
 
+![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/print-insert.png)
+
+
 ## Como consultar #tag armazenada através da API
 
 Qual o total de postagens para cada uma das #tag por "idioma/língua" do usuário que postou:
@@ -42,6 +45,9 @@ Qual o total de postagens para cada uma das #tag por "idioma/língua" do usuári
 ```
 curl http://localhost:5000/lang?hashtag=TAG
 ```
+
+![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/print-lang.png)
+
 
 ## LOGS do ambiente e da API - STACK (LOKI+PROMTAIL+GRAFANA)
 
