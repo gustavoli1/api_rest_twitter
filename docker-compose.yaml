@@ -27,7 +27,7 @@ services:
     ports:
       - "3100:3100"
     volumes:
-      - ./loki-config.yaml:/mnt/config/loki-config.yaml
+      - ./loki/loki-config.yaml:/mnt/config/loki-config.yaml
     command: -config.file=/mnt/config/loki-config.yaml
     networks:
       - compose-network
@@ -40,7 +40,7 @@ services:
     image: grafana/promtail:2.4.0
     container_name: promtail
     volumes:
-      - ./promtail-config.yaml:/mnt/config/promtail-config.yaml
+      - ./promtail/promtail-config.yaml:/mnt/config/promtail-config.yaml
       - /var/lib/docker/containers:/host/containers
     command: -config.file=/mnt/config/promtail-config.yaml
     networks:
@@ -50,13 +50,27 @@ services:
       options:
         tag: "{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}"
 
+  prometheus:
+    image: prom/prometheus:v2.30.3
+    container_name: prometheus
+    ports:
+      - 9000:9090
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prometheus-data:/prometheus
+    command: --web.enable-lifecycle  --config.file=/etc/prometheus/prometheus.yml
+    networks:
+       - compose-network
+
   grafana:
     environment:
       GF_SECURITY_ADMIN_PASSWORD: p0o9i8u7y6
     image: grafana/grafana:latest
     container_name: grafana
     volumes:
-    - ./provisioning:/etc/grafana/provisioning
+    - ./grafana/provisioning:/etc/grafana/provisioning
+    - ./grafana/dashboards:/var/lib/grafana/dashboards
+    - ./grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/default.yaml
     ports:
       - "3000:3000"
     networks:
@@ -81,6 +95,10 @@ services:
       driver: json-file
       options:
         tag: "{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}"
+
+volumes:
+  prometheus-data: 
+  grafana-data:
 
 networks: 
   compose-network:

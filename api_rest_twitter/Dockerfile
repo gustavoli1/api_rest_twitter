@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 COPY . /app
 RUN apt update && apt install python3-pip mysql-client curl locales locales-all -y
-RUN pip3 install requests Flask pymysql flask-mysql
+RUN pip3 install requests Flask pymysql flask-mysql prometheus-flask-exporter
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
