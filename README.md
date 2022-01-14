@@ -40,7 +40,7 @@ curl http://localhost:5000/insert?hashtag=TAG
 
 ## Como consultar #tag armazenada através da API
 
-Qual o total de postagens para cada uma das #tag por "idioma/língua" do usuário que postou:
+Consultar o total de tweet por usuário para cada uma das #tag por "idioma/língua":
 
 ```
 curl http://localhost:5000/lang?hashtag=TAG
