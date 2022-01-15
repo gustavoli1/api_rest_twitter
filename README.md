@@ -6,7 +6,7 @@ Esta aplicação tem como finalidade consumir a "API/V2" do Twitter pesquisando 
 
 O que é possível fazer com esta aplicação?
 
-- É possível inserir tags de forma dinâmica através da api.
+- Inserir tags de forma dinâmica no banco através da api.
 - Listar de forma dinâmica e separada os Tweet por "idioma/língua". 
 - Consultar o total de postagens, agrupadas por hora do dia indepente da #hashtag.
 - Consultar o total de postagens, agrupadas por hora do dia de forma dinâmica a #hashtag.
