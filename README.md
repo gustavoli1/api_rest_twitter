@@ -6,7 +6,7 @@ Esta aplicação tem como finalidade consumir a "API/V2" do Twitter pesquisando 
 
 O que é possível fazer com esta aplicação?
 
-- Inserir tags de forma dinâmica no banco através da api.
+- Inserir tags de forma dinâmica no banco de dados através da api.
 - Listar de forma dinâmica e separada os Tweet por "idioma/língua". 
 - Consultar o total de postagens, agrupadas por hora do dia indepente da #hashtag.
 - Consultar o total de postagens, agrupadas por hora do dia de forma dinâmica a #hashtag.
@@ -18,6 +18,15 @@ Uma observação importante é que as secrets keys e tokens contidos nestes proj
 
 Para o provisiomento deste ambiente é necessário que seu sistema operacional seja Linux, tenha Git e "Docker-Compose" instalado e configurado.
 
+## Configuração do Ambiente
+
+Para iniciar o ambiente é necessário clonar este reposório, acessar o diretório e executar o script:
+```
+git clone https://github.com/gustavoli1/api_rest_twitter.git
+# cd api_rest_twitter
+#./setup.sh
+```
+
 ## Estrutura do Docker-Compose
 
  - db_twitter - ("Bando de Dados")
@@ -27,20 +36,17 @@ Para o provisiomento deste ambiente é necessário que seu sistema operacional s
  - grafana - ("Dashboard utilizado para consultar Logs com EXPLORE e métricas")
  - api_rest_twitter - ("Responsável por consumir a API do Twitter, inserir e consultar os dados do banco")
 
-## Configuração do Ambiente
-
-Para iniciar o ambiente é necessário clonar este reposório, acessar o diretório e executar o script:
-```
-git clone https://github.com/gustavoli1/api_rest_twitter.git
-# cd api_rest_twitter
-# ./setup.sh
-```
-
 ## Armazenando tag de forma dinâmica no banco através da API 
 
-Para coletar e armazenar as mensagens na base de dados de forma dinâmica, basta executar este curl abaixo e substitur o valor de TAG para openbankig por exemplo.
+Para coletar e armazenar as mensagens na base de dados de forma dinâmica, basta executar este curl abaixo e substitur o valor a tag para openbankig por exemplo.
 ```
 curl http://localhost:5000/insert?hashtag=TAG
+```
+
+O script abaixo coleta e armazena as mensagens na base de dados, para as seguintes tags: "#openbanking, #remediation, #devops, #sre, #microservices, #observability, #oauth, #metrics, #logmonitoring, #opentracing". 
+
+```
+#./hashtags_insert.sh
 ```
 
 ![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/print-insert.png)
