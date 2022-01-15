@@ -38,7 +38,7 @@ Para iniciar o ambiente é necessário clonar este reposório, acessar o diretó
 
 ## Armazenando tag de forma dinâmica no banco através da API 
 
-Para coletar e armazenar as mensagens na base de dados de forma dinâmica, basta executar este curl abaixo e substitur o valor a tag para openbankig por exemplo.
+Para coletar e armazenar as mensagens na base de dados de forma dinâmica, basta executar este curl abaixo e substitur o valor da tag para openbankig por exemplo.
 ```
 curl http://localhost:5000/insert?hashtag=TAG
 ```
