@@ -22,7 +22,7 @@ Para o provisiomento deste ambiente é necessário que seu sistema operacional s
 
 Para iniciar o ambiente é necessário clonar este reposório, acessar o diretório e executar o script:
 ```
-git clone https://github.com/gustavoli1/api_rest_twitter.git
+# git clone https://github.com/gustavoli1/api_rest_twitter.git
 # cd api_rest_twitter
 #./setup.sh
 ```
