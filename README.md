@@ -2,7 +2,14 @@
 
 No momento este case segue em desenvolvimento com diversos pontos a melhorar, como implementação de métricas, gerencimaneto de secrets, serviços de mensagerias, melhorias no código, novas funcionalidades, além da arquitetura que precisa ser revista. Visto que precisa aumentar a confiabilidade e segurança do ambiente.
 
-Esta aplicação tem como finalidade consumir a "API/V2" do Twitter pesquisando por termos ("hashtag") e inserir o retorno dos dados no banco. No momento é possível inserir tags de forma dinâmica através da aplicação, também é possível listar de forma dinâmica e separada os Tweet por "idioma/língua". 
+Esta aplicação tem como finalidade consumir a "API/V2" do Twitter pesquisando por termos ("hashtag") e inserir o retorno no banco. O formato de retorno dos dados do api_rest_twitter é em JSON.
+
+O que é possível fazer com esta aplicação?
+
+- É possível inserir tags de forma dinâmica através da api.
+- Listar de forma dinâmica e separada os Tweet por "idioma/língua". 
+- Consultar o total de postagens, agrupadas por hora do dia indepente da #hashtag.
+- Consultar o total de postagens, agrupadas por hora do dia de forma dinâmica a #hashtag.
 
 Este ambiente foi provisionado com "Docker-Compose" e para seu desenvolvimento foi utilizado Python, Shell Script, Flask e MySQL. 
 Uma observação importante é que as secrets keys e tokens contidos nestes projeto estão públicos, porém, efêmeros com data prevista para se tornarem obsoletas.
@@ -11,7 +18,7 @@ Uma observação importante é que as secrets keys e tokens contidos nestes proj
 
 Para o provisiomento deste ambiente é necessário que seu sistema operacional seja Linux, tenha Git e "Docker-Compose" instalado e configurado.
 
-## Composição do Docker-Compose
+## Estrutura do Docker-Compose
 
  - db_twitter - ("Bando de Dados")
  - prometheus - ("Sistema de coleta de métricas de aplicações e serviços para armazenamento em timestamp")
@@ -50,7 +57,7 @@ curl http://localhost:5000/tag_by_lang?hashtag=TAG
 ![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/print-lang.png)
 
 
-## LOGS do ambiente e da API - STACK (LOKI+PROMTAIL+GRAFANA)
+## LOGS da aplicação e do ambiente - STACK (LOKI+PROMTAIL+GRAFANA)
 
 O Grafana é basicamente uma ferramenta que utliza de diversas fontes de dados para provisionar paíneis de métricas e LOGs. Nesta stack utlizaremos o LOKI como  centralizador de LOGs e utilizar o Explore do Grafana para consultar logs. 
 
@@ -64,7 +71,7 @@ Exemplos de Query:
 
 {container_name="api_rest_twitter"}
 
-[http://localhost:3000/explore?orgId=1&left=%5B%22now-1h%22,%22now%22,%22loki%22,%7B%22refId%22:%22A%22,%22expr%22:%22%7Bcontainer_name%3D%5C%22api_rest_twitter%5C%22%7D%22%7D%5D](http://localhost:3000/explore?orgId=1&left=%5B%22now-1h%22,%22now%22,%22loki%22,%7B%22refId%22:%22A%22,%22expr%22:%22%7Bcontainer_name%3D%5C%22api_rest_twitter%5C%22%7D%22%7D%5D)
+[Modelo de consulta](http://localhost:3000/explore?orgId=1&left=%5B%22now-1h%22,%22now%22,%22loki%22,%7B%22refId%22:%22A%22,%22expr%22:%22%7Bcontainer_name%3D%5C%22api_rest_twitter%5C%22%7D%22%7D%5D)
 
 ![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/explore_1.png)
 
