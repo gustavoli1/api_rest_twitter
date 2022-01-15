@@ -63,9 +63,9 @@ curl http://localhost:5000/tag_by_lang?hashtag=TAG
 ![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/print-lang.png)
 
 
-## LOGS da aplicação e do ambiente - STACK (LOKI+PROMTAIL+GRAFANA)
+## Logs de aplicação e de ambiente
 
-O Grafana é basicamente uma ferramenta que utliza de diversas fontes de dados para provisionar paíneis de métricas e LOGs. Nesta stack utlizaremos o LOKI como  centralizador de LOGs e utilizar o Explore do Grafana para consultar logs. 
+Nesta Stack utilizaremos (LOKI+PROMTAIL+GRAFANA) para armazenar, capturar logs e consultar logs através do Explore do Grafana. 
 
 Segue os dados de acesso: USER="admin" - PASSWD="p0o9i8u7y6".
 
