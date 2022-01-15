@@ -6,38 +6,12 @@
 	},
 	"item": [
 		{
-			"name": "Classificar termo por idioma",
+			"name": "Inserir tag de forma dinâmica através da api",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/lang?hashtag=metrics",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"lang"
-					],
-					"query": [
-						{
-							"key": "hashtag",
-							"value": "metrics"
-						}
-					]
-				},
-				"description": "Classifica o termo por idioma"
-			},
-			"response": []
-		},
-		{
-			"name": "Inserir termo na base de dados",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:5000/insert?hashtag",
+					"raw": "http://localhost:5000/insert?hashtag=",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -49,7 +23,102 @@
 					"query": [
 						{
 							"key": "hashtag",
-							"value": null
+							"value": ""
+						}
+					]
+				},
+				"description": "Classifica o termo por idioma"
+			},
+			"response": []
+		},
+		{
+			"name": "Obter os Tweet por \"idioma/língua\"",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/insert?hashtag=",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"insert"
+					],
+					"query": [
+						{
+							"key": "hashtag",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar o total de postagens, agrupadas por hora do dia indepente da hashtag",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/group_by_hour",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"group_by_hour"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar o total de postagens, agrupadas por hora do dia por hashtag",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/group_by_hour_tag?hashtag=metrics",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"group_by_hour_tag"
+					],
+					"query": [
+						{
+							"key": "hashtag",
+							"value": "metrics"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Collection-API_REST_TWITTER",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/group_by_hour_tag?hashtag=metrics",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"group_by_hour_tag"
+					],
+					"query": [
+						{
+							"key": "hashtag",
+							"value": "metrics"
 						}
 					]
 				}
