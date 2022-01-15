@@ -4,9 +4,11 @@ import json, pymysql, os, sys, requests
 app = Flask(__name__)
 app.run(debug=True,port=5000,host='0.0.0.0')
 metrics = PrometheusMetrics(app)
+
 @app.route('/')
 def main():
     pass
+
 @app.route('/insert')
 def getInsert():
     pass
@@ -32,8 +34,9 @@ def getInsert():
     con.commit()
     con.close()
     return json.dumps(json_response, indent=4, sort_keys=True)
-@app.route('/lang')
-def getCountry():
+
+@app.route('/tag_by_lang')
+def getLang():
     pass
     con = pymysql.connect(host = 'db_twitter',user = 'twitter_user',passwd = 'p0o9i8u7y6',db = 'twitter_db')
     cursor = con.cursor()
@@ -42,3 +45,30 @@ def getCountry():
     con.commit()
     con.close()
     return json.dumps(data, indent=4, sort_keys=True)    
+
+@app.route('/group_by_hour')
+def getGroupHour():
+    pass
+    con = pymysql.connect(host = 'db_twitter',user = 'twitter_user',passwd = 'p0o9i8u7y6',db = 'twitter_db')
+    cursor = con.cursor()
+    cursor.execute("SELECT DATE_FORMAT(MIN(created_at), '%d/%m/%Y %H:%i:00') AS group_by_hour, count(created_at) AS count_tweet FROM twitter_db GROUP BY ROUND(UNIX_TIMESTAMP(created_at) / 3600);")
+    data = cursor.fetchall()
+    con.commit()
+    con.close()
+    return json.dumps(data, indent=4, sort_keys=True) 
+
+@app.route('/group_by_hour_tag')
+def getGroupHourTag():
+    pass
+    con = pymysql.connect(host = 'db_twitter',user = 'twitter_user',passwd = 'p0o9i8u7y6',db = 'twitter_db')
+    cursor = con.cursor()
+    cursor.execute("SELECT DATE_FORMAT(MIN(created_at), '%d/%m/%Y %H:%i:00') AS tmstamp, hashtag, COUNT(hashtag) AS cnt FROM twitter_db WHERE hashtag='"+request.args["hashtag"]+"'GROUP BY ROUND(UNIX_TIMESTAMP(created_at) / 3600), hashtag;")
+    data = cursor.fetchall()
+    con.commit()
+    con.close()
+    return json.dumps(data, indent=4, sort_keys=True)
+
+
+
+
+
