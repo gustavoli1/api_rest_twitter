@@ -2,7 +2,7 @@
 
 No momento este case segue em desenvolvimento com diversos pontos a melhorar, como implementação de métricas, gerencimaneto de secrets, serviços de mensagerias, melhorias no código, novas funcionalidades, além da arquitetura que precisa ser revista. Visto que precisa aumentar a confiabilidade e segurança do ambiente.
 
-Esta aplicação tem como finalidade consumir a "API/V2" do Twitter pesquisando por termos ("hashtag") e inserir o retorno no banco. O formato de retorno dos dados do api_rest_twitter é em JSON.
+Esta aplicação tem como finalidade consumir a API do Twitter pesquisando por termos ("hashtag") e inserir o retorno no banco. O formato de retorno dos dados do api_rest_twitter é em JSON.
 
 O que é possível fazer com esta aplicação?
 
