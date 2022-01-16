@@ -65,17 +65,49 @@ curl http://localhost:5000/tag_by_lang?hashtag=TAG
 
 ## Logs de aplicação e de ambiente
 
-Nesta Stack utilizaremos (LOKI+PROMTAIL+GRAFANA) para armazenar, capturar logs e consultar logs através do Explore do Grafana. 
+Nesta Stack utilizaremos Loki como centralizador de logs, Promtail para fazer o scrap de logs do container e da aplicação, e o Grafana para consultar logs através do Explore. 
 
-Segue os dados de acesso: USER="admin" - PASSWD="p0o9i8u7y6".
+Segue os dados de acesso para acessar o Grafana: USER="admin" - PASSWD="p0o9i8u7y6".
 
 [http://localhost:3000/explore](http://localhost:3000/explore)
 
 
-Para coletar os logs de saída de um container em específico, pode utilizar os exemplos das query abaixo:
+Para coletar os logs de saída de um container em específico, utilizaremos o LogQL para fazer query no Loki.
 
+
+Consultar saída padrão de logs do stdout, contagem de erros com intervalos de tempo de 1h:
+```
+count_over_time({stream="stdout"} |= "error" [1h])
+```
+
+Retornar todas as linhas de log para o container "api_rest_twitter":
 ```
 {container_name="api_rest_twitter"}
+```
+
+Consultar linhas de logs que contenham erro:
+```
+{container_name="api_rest_twitter"} |= "error"
+```
+
+Consultar linhas de logs que contenham exceções:
+```
+{container_name="api_rest_twitter"} |= "exception" 
+```
+
+Consultar linhas de logs que tiverem erro, exceto o que tiverem timeout:
+```
+{container_name="api_rest_twitter"} |= "error" != "timeout"
+```
+
+Consultar logs excluíndo "/metrics"
+```
+{container_name="api_rest_twitter"} != "/metrics"
+```
+
+
+```
+{container_name="api_rest_twitter"} | duration >= 20ms or method="GET"
 ```
 
 [Modelo de consulta](http://localhost:3000/explore?orgId=1&left=%5B%22now-1h%22,%22now%22,%22loki%22,%7B%22refId%22:%22A%22,%22expr%22:%22%7Bcontainer_name%3D%5C%22api_rest_twitter%5C%22%7D%22%7D%5D)
