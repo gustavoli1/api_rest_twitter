@@ -73,9 +73,10 @@ Segue os dados de acesso: USER="admin" - PASSWD="p0o9i8u7y6".
 
 
 Para coletar os logs de saída de um container em específico, pode utilizar os exemplos das query abaixo:
-Exemplos de Query:
 
+```
 {container_name="api_rest_twitter"}
+```
 
 [Modelo de consulta](http://localhost:3000/explore?orgId=1&left=%5B%22now-1h%22,%22now%22,%22loki%22,%7B%22refId%22:%22A%22,%22expr%22:%22%7Bcontainer_name%3D%5C%22api_rest_twitter%5C%22%7D%22%7D%5D)
 
