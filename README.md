@@ -34,14 +34,14 @@ Para iniciar o ambiente é necessário clonar este reposório, acessar o diretó
  - grafana - ("Dashboard utilizado para consultar Logs com EXPLORE e métricas")
  - api_rest_twitter - ("Responsável por consumir a API do Twitter, inserir e consultar os dados do banco")
 
-## Armazena tag de forma dinâmica no banco através da API 
+## Inserir hashtag no banco através da API 
 
-Para coletar e armazenar as mensagens na base de dados, basta executar este curl abaixo e substituir o valor da string "TAG" para qualquer palavra desejada, como por exemplo: "openbankig".
+Para coletar e armazenar as mensagens na base de dados, basta executar este curl abaixo e substituir o valor da string "TAG" por qualquer palavra desejada, como por exemplo: "openbankig".
 ```
 curl http://localhost:5000/insert?hashtag=TAG
 ```
 
-O script abaixo coleta e armazena as mensagens na base de dados, para as seguintes tags: "#openbanking, #remediation, #devops, #sre, #microservices, #observability, #oauth, #metrics, #logmonitoring, #opentracing". 
+O script abaixo coleta e armazena as mensagens na base de dados, para as seguintes hashtags específicas: "#openbanking, #remediation, #devops, #sre, #microservices, #observability, #oauth, #metrics, #logmonitoring, #opentracing". 
 
 ```
 #./hashtags_insert.sh
