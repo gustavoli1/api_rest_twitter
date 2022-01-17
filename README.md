@@ -47,7 +47,7 @@ O script abaixo coleta e armazena as mensagens na base de dados, para as seguint
 #./hashtags_insert.sh
 ```
 
-![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/print-insert.png)
+![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/images/insert.png)
 
 
 ## Como consultar tag armazenada através da API
