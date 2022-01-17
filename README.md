@@ -34,7 +34,7 @@ Para iniciar o ambiente é necessário clonar este reposório, acessar o diretó
  - grafana - ("Dashboard utilizado para consultar Logs com EXPLORE e métricas")
  - api_rest_twitter - ("Responsável por consumir a API do Twitter, inserir e consultar os dados do banco")
 
-## Inserir hashtag no banco através da API 
+## Inserir hashtag no banco de dados através da API 
 
 Para coletar e armazenar as mensagens na base de dados, basta executar este curl abaixo e substituir o valor da string "TAG" por qualquer palavra desejada, como por exemplo: "openbankig".
 ```
@@ -50,7 +50,7 @@ O script abaixo coleta e armazena as mensagens na base de dados, para as seguint
 ![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/images/insert.png)
 
 
-## Consultar uma hashtag no banco de dados, classificando por idioma/língua
+## Consultar hashtag no banco de dados, classificando por idioma/língua
 
 Consultar o total de tweet por idioma/ língua, de cada #Hashtag, sendo necessária apenas a substituição da string TAG:
 
