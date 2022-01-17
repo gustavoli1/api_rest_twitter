@@ -69,7 +69,7 @@ Consultar o total de tweet agrupados por hora do dia independentemente da #hasht
 curl http://localhost:5000/group_by_hour
 ```
 
-![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/group_by_hour.png)
+![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/images/group_by_hour.png)
 
 
 Consultar o total de tweet de alguma #hashtag agrupados por hora do dia substutíndo a string "TAG":
@@ -78,7 +78,7 @@ Consultar o total de tweet de alguma #hashtag agrupados por hora do dia substut�
 curl http://localhost:5000/group_by_hour_tag?hashtag=TAG
 ```
 
-![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/group_by_hour_tag.png)
+![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/images/group_by_hour_tag.png)
 
 
 
@@ -138,7 +138,7 @@ Consultar logs excluíndo "/metrics"
 
 [Modelo de consulta](http://localhost:3000/explore?orgId=1&left=%5B%22now-1h%22,%22now%22,%22loki%22,%7B%22refId%22:%22A%22,%22expr%22:%22%7Bcontainer_name%3D%5C%22api_rest_twitter%5C%22%7D%22%7D%5D)
 
-![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/explore_2.png)
+![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/images/explore_2.png)
 
 ## Postman - Collection
 
