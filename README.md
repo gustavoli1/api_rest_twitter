@@ -81,6 +81,59 @@ curl http://localhost:5000/group_by_hour_tag?hashtag=TAG
 ![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/images/group_by_hour_tag.png)
 
 
+## Métricas de aplicação e de ambiente
+
+Nesta Stack utilizaremos Prometheus como nosso bando de dados timestamp, Node-Exporter para coletar as métricas do container e Prometheus-Flask-Exporter que foi instrumento na aplicação para coletar dados de métricas mais precisos.
+
+[http://localhost:3000/?orgId=1](http://localhost:3000/explore)
+
+Segue os dados de acesso ao Grafana: USER="admin" - PASSWD="p0o9i8u7y6".
+
+![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/images/metrics_2.png)
+
+![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/images/metrics.png)
+
+Para gerar dados e insumos no Grafana, para obter métricas e logs  por gentileza rode este comando abaixo em seu terminal; este comando fará um loop de 5 minutos simulando algumas chamadas na API.
+```
+# START=`date +%s`;time while [ $(( $(date +%s) - 300 )) -lt $START ]; do curl "http://localhost:5000/{insert?hashtag=metrics,group_by_hour,group_by_hour_tag?hashtag=error,tag_by_lang?hashtag=metrics}"; done
+```
+
+
+Para coletar as métricas de saída utilizaremos o PromQL para fazer query no Prometheus.
+
+
+Total de Requests por Minuto:
+```
+increase(flask_http_request_total{status="200"}[1m])
+```
+
+Quantidade de Erros - API Rest Twitter:
+```
+increase(flask_http_request_total{status!="200"}[1m])
+```
+
+Latência - Tempo de Execução:
+```
+rate(flask_http_request_duration_seconds_sum{status="200"}[1m])
+/
+rate(flask_http_request_duration_seconds_count{status="200"}[1m])
+```
+
+Container - Consumo de CPU
+```
+rate(process_cpu_seconds_total{job="services",instance="api_rest_twitter:5000"}[1m])
+```
+
+Container - Consumo de Memória
+```
+process_resident_memory_bytes{job="services",instance="api_rest_twitter:5000"}
+```
+
+Container - Tráfego de Rede
+```
+node_network_receive_bytes{device="eth0", instance="api_rest_twitter:9100", job="services"}
+```
+
 
 ## Logs de aplicação e de ambiente
 
