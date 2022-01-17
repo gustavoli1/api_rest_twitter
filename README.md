@@ -2,7 +2,7 @@
 
 No momento este case segue em desenvolvimento com diversos pontos a melhorar, como implementação de métricas, gerencimaneto de secrets, serviços de mensagerias, melhorias no código, novas funcionalidades, além da arquitetura que precisa ser revista. Visto que precisa aumentar a confiabilidade e segurança do ambiente.
 
-Esta aplicação tem como finalidade consumir a "API/V2" do Twitter pesquisando por termos ("hashtag") e inserir o retorno no banco. O formato de retorno dos dados do api_rest_twitter é em JSON.
+Esta aplicação tem como finalidade consumir a API do Twitter pesquisando por termos ("hashtag") e inserir o retorno no banco. O formato de retorno dos dados do api_rest_twitter é em JSON.
 
 O que é possível fazer com esta aplicação?
 
@@ -22,7 +22,7 @@ Para o provisiomento deste ambiente é necessário que seu sistema operacional s
 
 Para iniciar o ambiente é necessário clonar este reposório, acessar o diretório e executar o script:
 ```
-git clone https://github.com/gustavoli1/api_rest_twitter.git
+# git clone https://github.com/gustavoli1/api_rest_twitter.git
 # cd api_rest_twitter
 #./setup.sh
 ```
@@ -38,7 +38,7 @@ git clone https://github.com/gustavoli1/api_rest_twitter.git
 
 ## Armazenando tag de forma dinâmica no banco através da API 
 
-Para coletar e armazenar as mensagens na base de dados de forma dinâmica, basta executar este curl abaixo e substitur o valor a tag para openbankig por exemplo.
+Para coletar e armazenar as mensagens na base de dados de forma dinâmica, basta executar este curl abaixo e substitur o valor da tag para openbankig por exemplo.
 ```
 curl http://localhost:5000/insert?hashtag=TAG
 ```
@@ -63,23 +63,63 @@ curl http://localhost:5000/tag_by_lang?hashtag=TAG
 ![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/print-lang.png)
 
 
-## LOGS da aplicação e do ambiente - STACK (LOKI+PROMTAIL+GRAFANA)
+## Logs de aplicação e de ambiente
 
-O Grafana é basicamente uma ferramenta que utliza de diversas fontes de dados para provisionar paíneis de métricas e LOGs. Nesta stack utlizaremos o LOKI como  centralizador de LOGs e utilizar o Explore do Grafana para consultar logs. 
+Nesta Stack utilizaremos Loki como centralizador de logs, Promtail para fazer o scrap de logs do container e da aplicação, e o Grafana para consultar logs através do Explore. 
 
-Segue os dados de acesso: USER="admin" - PASSWD="p0o9i8u7y6".
+Segue os dados de acesso ao Grafana: USER="admin" - PASSWD="p0o9i8u7y6".
 
 [http://localhost:3000/explore](http://localhost:3000/explore)
 
 
-Para coletar os logs de saída de um container em específico, pode utilizar os exemplos das query abaixo:
-Exemplos de Query:
+Para gerar dados e insumos no Grafana, para obter métricas e logs  por gentileza rode este comando abaixo em seu terminal; este comando fará um loop de 5 minutos simulando algumas chamadas na API.
+```
+# START=`date +%s`;time while [ $(( $(date +%s) - 300 )) -lt $START ]; do curl "http://localhost:5000/{insert?hashtag=metrics,group_by_hour,group_by_hour_tag?hashtag=error,tag_by_lang?hashtag=metrics}"; done
+```
 
+
+Para coletar os logs de saída de um container em específico, utilizaremos o LogQL para fazer query no Loki.
+
+
+Consultar saída padrão de logs do stdout, contagem de erros com intervalos de tempo de 1h:
+```
+count_over_time({stream="stdout"} |= "error" [1h])
+```
+
+Retornar todas as linhas de log para o container "api_rest_twitter":
+```
 {container_name="api_rest_twitter"}
+```
+
+Consultar linhas de logs que contenham erro no container da aplicação:
+```
+{container_name="api_rest_twitter"} |= "error"
+```
+
+Consultar linhas de logs incluindo o texto "error" ou "info" usando regex no stdout:
+```
+{stream="stdout"} |~ "error|info"
+```
+
+Consultar linhas de logs que contenham exceções:
+```
+{container_name="api_rest_twitter"} |= "exception" 
+```
+
+Consultar linhas de logs que tiverem erro, exceto o que tiverem timeout:
+```
+{container_name="api_rest_twitter"} |= "error" != "timeout"
+```
+
+Consultar logs excluíndo "/metrics"
+```
+{container_name="api_rest_twitter"} != "/metrics"
+```
+
 
 [Modelo de consulta](http://localhost:3000/explore?orgId=1&left=%5B%22now-1h%22,%22now%22,%22loki%22,%7B%22refId%22:%22A%22,%22expr%22:%22%7Bcontainer_name%3D%5C%22api_rest_twitter%5C%22%7D%22%7D%5D)
 
-![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/explore_1.png)
+![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/explore_2.png)
 
 ## Postman - Collection
 
