@@ -1,20 +1,20 @@
 ## API REST - TWITTER 
 
-No momento este case segue em desenvolvimento, esta aplicação tem como finalidade consumir a API do Twitter pesquisando por termos ("hashtag") e inserir o retorno no banco. O formato de retorno dos dados do api_rest_twitter é em JSON.
+Esta aplicação tem como finalidade consumir a API do Twitter, pesquisando por termos ("hashtag") e inserindo os retornos no banco de dados. O formato de retorno da api_rest_twitter é em JSON. No momento, este projeto segue em desenvolvimento.
 
 O que é possível fazer com esta aplicação?
 
-- Inserir tags de forma dinâmica no banco de dados através da api.
-- Listar de forma dinâmica e separada os Tweet por "idioma/língua". 
-- Consultar o total de postagens, agrupadas por hora do dia indepente da #hashtag.
-- Consultar o total de postagens, agrupadas por hora do dia de forma dinâmica a #hashtag.
+- Inserir tags de forma dinâmica no banco de dados através da API.
+- Listar de forma dinâmica e separada os Tweets por "idioma/língua". 
+- Consultar o total de postagens, agrupadas por hora do dia, independente da #hashtag.
+- Consultar o total de postagens, agrupadas por hora do dia, de forma dinâmica através de qualquer #hashtag.
 
-Este ambiente foi provisionado utlizando o "Docker-Compose" e para seu desenvolvimento foi utilizado Python, Shell Script, Flask e MySQL. 
-Uma observação importante é que as secrets keys e tokens contidos nestes projeto estão públicos, porém, efêmeros com data prevista para se tornarem obsoletos.
+Este ambiente foi provisionado com o "Docker-Compose" e para seu desenvolvimento foi utilizado Python, Shell Script, Flask e MySQL. 
+Uma observação importante é que as "Secrets Keys" e "Tokens" contidos neste projeto estão públicos, porém, efêmeros com data prevista para se tornarem obsoletos.
 
 ## Pré-Requisitos
 
-Para o provisiomento deste ambiente é necessário sistema operacional Linux ("Debian-Like"), Git e "Docker-Compose" instalado e configurado corretamente.
+Para o provisionamento deste ambiente é necessário sistema operacional Linux ("Debian-Like"), Git e "Docker-Compose" instalados e configurados corretamente.
 
 ## Configuração do Ambiente
 
@@ -27,7 +27,7 @@ Para iniciar o ambiente é necessário clonar este reposório, acessar o diretó
 
 ## Estrutura do Docker-Compose
 
- - db_twitter - ("Bando de Dados")
+ - db_twitter - ("Banco de Dados")
  - prometheus - ("Sistema de coleta de métricas de aplicações e serviços para armazenamento em timestamp")
  - loki - ("Centralizador de Logs")
  - promtail - ("Scrap coletor de saídas de logs")
@@ -36,7 +36,7 @@ Para iniciar o ambiente é necessário clonar este reposório, acessar o diretó
 
 ## Armazena tag de forma dinâmica no banco através da API 
 
-Para coletar e armazenar as mensagens na base de dados de forma dinâmica, basta executar este curl abaixo e substitur o valor da string "TAG" para openbankig por exemplo.
+Para coletar e armazenar as mensagens na base de dados, basta executar este curl abaixo e substituir o valor da string "TAG" para qualquer palavra desejada, como por exemplo: "openbankig".
 ```
 curl http://localhost:5000/insert?hashtag=TAG
 ```
@@ -50,9 +50,9 @@ O script abaixo coleta e armazena as mensagens na base de dados, para as seguint
 ![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/images/insert.png)
 
 
-## Como consultar tag armazenada através da API
+## Como consultar uma tag no banco de dados, através da API, classificando por idioma/língua
 
-Consultar o total de tweet por usuário para cada uma das #tag por "idioma/língua":
+Consultar o total de tweet por idioma/ língua, de cada #Hashtag, sendo necessária apenas a substituição da string TAG:
 
 ```
 curl http://localhost:5000/tag_by_lang?hashtag=TAG
@@ -63,7 +63,7 @@ curl http://localhost:5000/tag_by_lang?hashtag=TAG
 
 ## Como consultar o total de postagens
 
-Consultar o total de tweet agrupados por hora do dia independentemente da #hashtag:
+Consultar o total de tweet agrupados por hora do dia, independente da #hashtag:
 
 ```
 curl http://localhost:5000/group_by_hour
@@ -72,7 +72,7 @@ curl http://localhost:5000/group_by_hour
 ![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/images/group_by_hour.png)
 
 
-Consultar o total de tweet de alguma #hashtag agrupados por hora do dia substutíndo a string "TAG":
+Consultar o total de tweet de #hashtag específica, agrupado por hora do dia, substutíndo a string "TAG":
 
 ```
 curl http://localhost:5000/group_by_hour_tag?hashtag=TAG
@@ -83,7 +83,7 @@ curl http://localhost:5000/group_by_hour_tag?hashtag=TAG
 
 ## Métricas de aplicação e de ambiente
 
-Nesta Stack utilizaremos Prometheus como nosso bando de dados timestamp, Node-Exporter para coletar as métricas do container e Prometheus-Flask-Exporter que foi instrumento na aplicação para coletar dados de métricas mais precisos.
+Nesta Stack utilizaremos Prometheus como nosso banco de dados timestamp, Node-Exporter para coletar as métricas do container e Prometheus-Flask-Exporter, que foi instrumento na aplicação para coletar dados de métricas mais precisos.
 
 [http://localhost:3000/?orgId=1](http://localhost:3000/explore)
 
@@ -93,14 +93,14 @@ Segue os dados de acesso ao Grafana: USER="admin" - PASSWD="p0o9i8u7y6".
 
 ![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/images/metrics.png)
 
-Para gerar dados e insumos no Grafana, para obter métricas e logs  por gentileza rode este comando abaixo em seu terminal; este comando fará um loop de 5 minutos simulando algumas chamadas na API.
+Para gerar dados e insumos no Prometheus, por gentileza, rodar este comando abaixo em seu terminal. Este comando fará um loop de 5 minutos simulando algumas chamadas na API.
 ```
 # START=`date +%s`;time while [ $(( $(date +%s) - 300 )) -lt $START ]; do curl "http://localhost:5000/{insert?hashtag=metrics,group_by_hour,group_by_hour_tag?hashtag=error,tag_by_lang?hashtag=metrics}"; done
 ```
 
 
 
-Para coletar as métricas de saída utilizaremos o PromQL para fazer query no Prometheus.
+Para coletar as métricas de saída, será utilizado o PromQL para fazer query no Prometheus.
 
 
 Total de Requests por Minuto:
@@ -152,7 +152,7 @@ Segue os dados de acesso ao Grafana: USER="admin" - PASSWD="p0o9i8u7y6".
 [http://localhost:3000/explore](http://localhost:3000/explore)
 
 
-Para gerar dados e insumos no Grafana, para obter métricas e logs  por gentileza rode este comando abaixo em seu terminal; este comando fará um loop de 5 minutos simulando algumas chamadas na API.
+Para gerar dados e insumos no Loki, por gentileza rodar este comando abaixo em seu terminal. Este comando fará um loop de 5 minutos simulando algumas chamadas na API.
 ```
 # START=`date +%s`;time while [ $(( $(date +%s) - 300 )) -lt $START ]; do curl "http://localhost:5000/{insert?hashtag=metrics,group_by_hour,group_by_hour_tag?hashtag=error,tag_by_lang?hashtag=metrics}"; done
 ```
@@ -203,5 +203,5 @@ Consultar logs excluíndo "/metrics"
 
 ## Postman - Collection
 
-Para utilizar Postman é necessário importar o aquivo "Twitter - API.postman_collection" e inserir o valor da "tag" na chave hashtag para inserir ou conultar o termo.
+Para utilizar Postman é necessário importar o aquivo "Twitter - API.postman_collection" e inserir o valor da "tag" na chave hashtag para inserir ou consultar o termo.
 
