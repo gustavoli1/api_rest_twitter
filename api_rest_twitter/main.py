@@ -9,6 +9,7 @@ metrics = PrometheusMetrics(app)
 def main():
     pass
 
+# Inserir tag na base de dados
 @app.route('/insert')
 def getInsert():
     pass
@@ -35,6 +36,7 @@ def getInsert():
     con.close()
     return json.dumps(json_response, indent=4, sort_keys=True)
 
+# Consultar Postagens por Idioma
 @app.route('/tag_by_lang')
 def getLang():
     pass
@@ -46,6 +48,7 @@ def getLang():
     con.close()
     return json.dumps(data, indent=4, sort_keys=True)    
 
+# Consultar o número de postagens por hora do dia independente da hashtag
 @app.route('/group_by_hour')
 def getGroupHour():
     pass
@@ -57,18 +60,16 @@ def getGroupHour():
     con.close()
     return json.dumps(data, indent=4, sort_keys=True) 
 
+# Consutar o número de postagens de uma determinada tag por hora do dia
 @app.route('/group_by_hour_tag')
 def getGroupHourTag():
     pass
+    query = request.args["hashtag"]
     con = pymysql.connect(host = 'db_twitter',user = 'twitter_user',passwd = 'p0o9i8u7y6',db = 'twitter_db')
     cursor = con.cursor()
-    cursor.execute("SELECT DATE_FORMAT(MIN(created_at), '%d/%m/%Y %H:%i:00') AS tmstamp, hashtag, COUNT(hashtag) AS cnt FROM twitter_db WHERE hashtag='"+request.args["hashtag"]+"'GROUP BY ROUND(UNIX_TIMESTAMP(created_at) / 3600), hashtag;")
+    cursor.execute("SELECT DATE_FORMAT(MIN(created_at), '%d/%m/%Y %H:%i:00') AS tmstamp, hashtag, COUNT(hashtag) AS cnt FROM twitter_db WHERE hashtag='"+query+"' GROUP BY ROUND(UNIX_TIMESTAMP(created_at) / 3600), hashtag;")
     data = cursor.fetchall()
     con.commit()
     con.close()
     return json.dumps(data, indent=4, sort_keys=True)
-
-
-
-
 
