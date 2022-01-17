@@ -1,8 +1,6 @@
 ## API REST - TWITTER 
 
-No momento este case segue em desenvolvimento com diversos pontos a melhorar, como implementação de métricas, gerencimaneto de secrets, serviços de mensagerias, melhorias no código, novas funcionalidades, além da arquitetura que precisa ser revista. Visto que precisa aumentar a confiabilidade e segurança do ambiente.
-
-Esta aplicação tem como finalidade consumir a API do Twitter pesquisando por termos ("hashtag") e inserir o retorno no banco. O formato de retorno dos dados do api_rest_twitter é em JSON.
+No momento este case segue em desenvolvimento, esta aplicação tem como finalidade consumir a API do Twitter pesquisando por termos ("hashtag") e inserir o retorno no banco. O formato de retorno dos dados do api_rest_twitter é em JSON.
 
 O que é possível fazer com esta aplicação?
 
@@ -11,12 +9,12 @@ O que é possível fazer com esta aplicação?
 - Consultar o total de postagens, agrupadas por hora do dia indepente da #hashtag.
 - Consultar o total de postagens, agrupadas por hora do dia de forma dinâmica a #hashtag.
 
-Este ambiente foi provisionado com "Docker-Compose" e para seu desenvolvimento foi utilizado Python, Shell Script, Flask e MySQL. 
-Uma observação importante é que as secrets keys e tokens contidos nestes projeto estão públicos, porém, efêmeros com data prevista para se tornarem obsoletas.
+Este ambiente foi provisionado utlizando o "Docker-Compose" e para seu desenvolvimento foi utilizado Python, Shell Script, Flask e MySQL. 
+Uma observação importante é que as secrets keys e tokens contidos nestes projeto estão públicos, porém, efêmeros com data prevista para se tornarem obsoletos.
 
 ## Pré-Requisitos
 
-Para o provisiomento deste ambiente é necessário que seu sistema operacional seja Linux, tenha Git e "Docker-Compose" instalado e configurado.
+Para o provisiomento deste ambiente é necessário sistema operacional Linux ("Debian-Like"), Git e "Docker-Compose" instalado e configurado corretamente.
 
 ## Configuração do Ambiente
 
@@ -36,9 +34,9 @@ Para iniciar o ambiente é necessário clonar este reposório, acessar o diretó
  - grafana - ("Dashboard utilizado para consultar Logs com EXPLORE e métricas")
  - api_rest_twitter - ("Responsável por consumir a API do Twitter, inserir e consultar os dados do banco")
 
-## Armazenando tag de forma dinâmica no banco através da API 
+## Armazena tag de forma dinâmica no banco através da API 
 
-Para coletar e armazenar as mensagens na base de dados de forma dinâmica, basta executar este curl abaixo e substitur o valor da tag para openbankig por exemplo.
+Para coletar e armazenar as mensagens na base de dados de forma dinâmica, basta executar este curl abaixo e substitur o valor da string "TAG" para openbankig por exemplo.
 ```
 curl http://localhost:5000/insert?hashtag=TAG
 ```
@@ -61,6 +59,27 @@ curl http://localhost:5000/tag_by_lang?hashtag=TAG
 ```
 
 ![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/print-lang.png)
+
+
+## Como consultar o total de postagens
+
+Consultar o total de tweet agrupados por hora do dia independentemente da #hashtag:
+
+```
+curl http://localhost:5000/group_by_hour
+```
+
+![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/print-lang.png)
+
+
+Consultar o total de tweet de alguma #hashtag agrupados por hora do dia substutíndo a string "TAG":
+
+```
+curl http://localhost:5000/group_by_hour_tag?hashtag=TAG
+```
+
+![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/print-lang.png)
+
 
 
 ## Logs de aplicação e de ambiente
