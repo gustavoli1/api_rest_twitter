@@ -58,7 +58,7 @@ Consultar o total de tweet por usuário para cada uma das #tag por "idioma/líng
 curl http://localhost:5000/tag_by_lang?hashtag=TAG
 ```
 
-![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/print-lang.png)
+![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/images/tag_by_lang.png)
 
 
 ## Como consultar o total de postagens
@@ -69,7 +69,7 @@ Consultar o total de tweet agrupados por hora do dia independentemente da #hasht
 curl http://localhost:5000/group_by_hour
 ```
 
-![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/print-lang.png)
+![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/group_by_hour.png)
 
 
 Consultar o total de tweet de alguma #hashtag agrupados por hora do dia substutíndo a string "TAG":
@@ -78,7 +78,7 @@ Consultar o total de tweet de alguma #hashtag agrupados por hora do dia substut�
 curl http://localhost:5000/group_by_hour_tag?hashtag=TAG
 ```
 
-![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/print-lang.png)
+![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/group_by_hour_tag.png)
 
 
 
