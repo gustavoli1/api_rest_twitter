@@ -99,6 +99,7 @@ Para gerar dados e insumos no Grafana, para obter métricas e logs  por gentilez
 ```
 
 
+
 Para coletar as métricas de saída utilizaremos o PromQL para fazer query no Prometheus.
 
 
@@ -107,10 +108,12 @@ Total de Requests por Minuto:
 increase(flask_http_request_total{status="200"}[1m])
 ```
 
+
 Quantidade de Erros - API Rest Twitter:
 ```
 increase(flask_http_request_total{status!="200"}[1m])
 ```
+
 
 Latência - Tempo de Execução:
 ```
@@ -119,15 +122,18 @@ rate(flask_http_request_duration_seconds_sum{status="200"}[1m])
 rate(flask_http_request_duration_seconds_count{status="200"}[1m])
 ```
 
+
 Container - Consumo de CPU
 ```
 rate(process_cpu_seconds_total{job="services",instance="api_rest_twitter:5000"}[1m])
 ```
 
+
 Container - Consumo de Memória
 ```
 process_resident_memory_bytes{job="services",instance="api_rest_twitter:5000"}
 ```
+
 
 Container - Tráfego de Rede
 ```
