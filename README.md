@@ -50,7 +50,7 @@ O script abaixo coleta e armazena as mensagens na base de dados, para as seguint
 ![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/images/insert.png)
 
 
-## Como consultar uma tag no banco de dados, através da API, classificando por idioma/língua
+## Consultar uma hashtag no banco de dados, classificando por idioma/língua
 
 Consultar o total de tweet por idioma/ língua, de cada #Hashtag, sendo necessária apenas a substituição da string TAG:
 
