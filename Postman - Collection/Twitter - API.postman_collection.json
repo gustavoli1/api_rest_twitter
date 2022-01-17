@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Inserir tag de forma dinâmica através da api",
+			"name": "Inserir tag de forma dinâmica no banco de dados",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -81,7 +81,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/group_by_hour_tag?hashtag=metrics",
+					"raw": "http://localhost:5000/group_by_hour_tag?hashtag=",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -93,32 +93,7 @@
 					"query": [
 						{
 							"key": "hashtag",
-							"value": "metrics"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Collection-API_REST_TWITTER",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:5000/group_by_hour_tag?hashtag=metrics",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"group_by_hour_tag"
-					],
-					"query": [
-						{
-							"key": "hashtag",
-							"value": "metrics"
+							"value": ""
 						}
 					]
 				}
