@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a7563826-b4ea-41ed-bd28-2271dcd95747",
+		"_postman_id": "c486efec-7ff1-45d6-9556-524557776eba",
 		"name": "Twitter - API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -37,14 +37,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/insert?hashtag=",
+					"raw": "http://localhost:5000/tag_by_lang?hashtag=",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "5000",
 					"path": [
-						"insert"
+						"tag_by_lang"
 					],
 					"query": [
 						{
