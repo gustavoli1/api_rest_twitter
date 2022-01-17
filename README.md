@@ -84,7 +84,9 @@ curl http://localhost:5000/group_by_hour_tag?hashtag=TAG
 
 ## Logs de aplicação e de ambiente
 
-Nesta Stack utilizaremos Loki como centralizador de logs, Promtail para fazer o scrap de logs do container e da aplicação, e o Grafana para consultar logs através do Explore. 
+Nesta Stack utilizaremos Loki como centralizador de logs, Promtail para fazer o scrap de logs do container e da aplicação e o Grafana para consultar logs através do Explore. 
+
+![Example dashboard](https://github.com/gustavoli1/api_rest_twitter/blob/main/images/error_log.png)
 
 Segue os dados de acesso ao Grafana: USER="admin" - PASSWD="p0o9i8u7y6".
 
