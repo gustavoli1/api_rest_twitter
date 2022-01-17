@@ -67,9 +67,15 @@ curl http://localhost:5000/tag_by_lang?hashtag=TAG
 
 Nesta Stack utilizaremos Loki como centralizador de logs, Promtail para fazer o scrap de logs do container e da aplicação, e o Grafana para consultar logs através do Explore. 
 
-Segue os dados de acesso para acessar o Grafana: USER="admin" - PASSWD="p0o9i8u7y6".
+Segue os dados de acesso ao Grafana: USER="admin" - PASSWD="p0o9i8u7y6".
 
 [http://localhost:3000/explore](http://localhost:3000/explore)
+
+
+Para gerar dados e insumos no Grafana, para obter métricas e logs  por gentileza rode este comando abaixo em seu terminal; este comando faz um loop de 5 minutos batendo na API simulando algumas chamadas.
+```
+# START=`date +%s`;time while [ $(( $(date +%s) - 300 )) -lt $START ]; do curl "http://localhost:5000/{insert?hashtag=metrics,group_by_hour,group_by_hour_tag?hashtag=error,tag_by_lang?hashtag=metrics}"; done
+```
 
 
 Para coletar os logs de saída de um container em específico, utilizaremos o LogQL para fazer query no Loki.
