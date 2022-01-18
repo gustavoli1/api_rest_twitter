@@ -95,7 +95,7 @@ Segue os dados de acesso ao Grafana: USER="admin" - PASSWD="p0o9i8u7y6".
 
 Para gerar dados e insumos no Prometheus, por gentileza, rodar este comando abaixo em seu terminal. Este comando fará um loop de 5 minutos simulando algumas chamadas na API.
 ```
-# START=`date +%s`;time while [ $(( $(date +%s) - 300 )) -lt $START ]; do curl "http://localhost:5000/{insert?hashtag=metrics,group_by_hour,group_by_hour_tag?hashtag=error,tag_by_lang?hashtag=metrics}"; done
+# START=`date +%s`;time while [ $(( $(date +%s) - 300 )) -lt $START ]; do curl "http://localhost:5000/{insert?hashtag=metrics,group_by_hour,group_by_hour_tag?hashtag=metrics,error,tag_by_lang?hashtag=metrics}"; done
 ```
 
 
